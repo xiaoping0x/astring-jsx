@@ -68,6 +68,18 @@ var generator = Object.assign({
     this[node.expression.type](node.expression, state);
     output.write('}');
   },
+  // {...props}
+  JSXSpreadAttribute: function JSXSpreadAttribute(node, state) {
+    var output = state.output;
+    output.write(' {...');
+    this[node.argument.type](node.argument, state);
+    output.write('}');
+  },
+  // JSXText
+  JSXText: function JSXText(node, state) {
+    var output = state.output;
+    output.write(node.value);
+  },
 }, astring.defaultGenerator);
 
 function astringJsx (ast, options) {
